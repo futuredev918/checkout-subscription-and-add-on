@@ -7,8 +7,7 @@ var setupElements = function() {
     headers: {
       "Content-Type": "application/json"
     }
-  })
-    .then(function(result) {
+  }).then(function(result) {
       return result.json();
     })
     .then(function(data) {

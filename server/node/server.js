@@ -4,7 +4,6 @@ const { resolve } = require("path");
 // Copy the .env.example in the root into a .env file in this folder
 const env = require("dotenv").config({ path: "./.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
 app.use(express.static(process.env.STATIC_DIR));
 app.use(
   express.json({
@@ -22,7 +21,6 @@ app.get("/", (req, res) => {
   const path = resolve(process.env.STATIC_DIR + "/index.html");
   res.sendFile(path);
 });
-
 // Fetch the Checkout Session to display the JSON result on the success page
 app.get("/checkout-session", async (req, res) => {
   const { sessionId } = req.query;
@@ -61,7 +59,7 @@ app.post("/create-checkout-session", async (req, res) => {
   } else {
     // Customer is only signing up for a subscription
     session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      payment_method_types: ['card'],
       subscription_data: {
         items: [
           {
